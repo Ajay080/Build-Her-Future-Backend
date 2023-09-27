@@ -2,7 +2,6 @@ const express= require('express')
 const User= require('../models/user')
 const router= new express.Router();
 const auth=require('../middleware/auth')
-const fs = require('fs')
 
 
 router.post('/users/signup', async(req, res)=>{ // route handler
@@ -22,7 +21,6 @@ router.post('/users/login', async(req, res)=>{
     try{
         const user=await User.findByCredentials(req.body.email, req.body.password)
         const token= await user.generateAuthToken()
-        // fs.writeFileSync("token.txt", JSON.stringify(token))
         return res.send({user, token})
     }
     catch(e){

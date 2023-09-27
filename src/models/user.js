@@ -93,18 +93,13 @@ userSchema.pre('save',async function(next){//standard function because arrow fun
         user.password=await bcrypt.hash(user.password,8)
     }
     //here we hash the password
-    console.log('just before save')
+    // console.log('just before save')
 
     //when this async function is done , we will call next otherwise it will hang forever
     next()
 
 })
 
-// userSchema.pre('remove',async function (next){
-//     const user=this
-//     await Task.deleteMany({owner:user._id})
-//     next()
-// })
 
 const User= mongoose.model('User', userSchema)
 

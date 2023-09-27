@@ -16,9 +16,18 @@ router.post('/addblogs/newpost',auth, authrole, async(req, res)=>{
 })
 
 router.get('/addblogs/getpost', async(req, res)=>{
+    const page = parseInt(req.query.page) || 1;
     try{
-        const job= await Job.find({});
-        res.send(job)
+        const totalJobCards = await Job.countDocuments();
+        const totalPages = Math.ceil(totalJobCards / 12);
+        const skip = (page - 1) * 12;
+        const jobCards= await Job.find({}).skip(skip).limit(12);
+
+        res.send({
+            jobCards,
+            totalPages,
+            currentPage:page
+        });
     }
     catch(error){
         res.status(400).send(error)
@@ -27,8 +36,8 @@ router.get('/addblogs/getpost', async(req, res)=>{
 
 router.delete('/addblogs/deletepost/:id',  async(req, res)=>{
     const _id=req.params.id
-    console.log("ID",_id);
-    console.log("REQ",req.params);
+    // console.log("ID",_id);
+    // console.log("REQ",req.params);
     try{
         const job= await Job.findByIdAndDelete(_id)
         // const job=await Job.remove({_id:id})

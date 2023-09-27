@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 // If you have it in the environment variable then remove the second mongoose.connect call.
 
-mongoose.connect("mongodb://127.0.0.1:27017", {
+mongoose.connect(process.env.MONGODB_URL, {
   dbName:"she_log_user",
   useNewUrlParser: "true",
   useUnifiedTopology: "true"

@@ -1,9 +1,5 @@
 const mongoose=require('mongoose')
-const validator=require('validator')
-const bcrypt=require('bcryptjs')
-const jwt=require('jsonwebtoken');
-const { Timestamp } = require('mongodb');
-const User= require('./user')
+
 
 const jobSchema= new mongoose.Schema({
     title:{
@@ -62,14 +58,6 @@ const jobSchema= new mongoose.Schema({
         timestamps:true,
     }
 );
-// jobSchema.methods.toJSON=function(){
-//     const job=this
-//     const jobObject= job.toObject()
-//     // delete userObject.tokens
-//     // delete userObject.password
-//     return jobObject
-// }
-
 const Job=mongoose.model('Job', jobSchema)
 
 module.exports=Job
