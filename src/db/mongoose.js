@@ -8,5 +8,4 @@ mongoose.connect(process.env.MONGODB_URL, {
   dbName:"she_log_user",
   useNewUrlParser: "true",
   useUnifiedTopology: "true"
-
 })
